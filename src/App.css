@@ -1,0 +1,134 @@
+/* src/App.css (keep or replace your existing) */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  height: 100%;
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.weather-box {
+  background: rgba(0,0,0,0.6);
+  border-radius: 12px;
+  padding: 20px;
+  width: 90%;
+  max-width: 900px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.search input {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  width: 60%;
+  max-width: 350px;
+}
+
+.search button {
+  background-color: #1e90ff;
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.error {
+  text-align: center;
+  color: #ff6b6b;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* Map */
+.map-container {
+  width: 100%;
+  height: 400px;
+  margin-top: 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.map-search {
+  margin: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+  width: 260px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+/* Layer controls */
+.layer-controls {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.layer-controls button {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: none;
+  margin: 5px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Weather card details */
+.weather-card {
+  margin-top: 15px;
+  background: rgba(255,255,255,0.06);
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.weather-card img {
+  width: 90px;
+}
+
+.weather-card h2 {
+  color: #fff;
+  margin: 5px 0;
+}
+
+.weather-card h3 {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+.desc {
+  color: #e0e0e0;
+  text-transform: capitalize;
+}
+
+.details {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+  font-weight: 600;
+}
