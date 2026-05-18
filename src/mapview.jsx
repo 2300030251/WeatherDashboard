@@ -2,11 +2,10 @@
 import React, { useEffect, useRef } from "react";
 import "./App.css";
 
-// ---- HARD-CODED KEYS (for local testing) ----
-// Replace these with your own or move to env vars later (Vite uses VITE_..., CRA uses REACT_APP_...).
-const GOOGLE_MAPS_KEY = "AIzaSyBoRkHHCQwUEIMGnYjE4kqWuO3rH_JiGw4";
-const OPENWEATHER_KEY = "ba2c501303c394b73b15a36c6989d93c";
-// ---------------------------------------------
+// Load keys from Vite environment variables. Set these in .env (VITE_ prefix)
+// or as repository secrets for CI (see README / workflow).
+const GOOGLE_MAPS_KEY = import.meta.env.VITE_GOOGLE_MAPS_KEY;
+const OPENWEATHER_KEY = import.meta.env.VITE_OPENWEATHER_KEY;
 
 export default function MapView({ layer = "clouds_new", onLocationSelect = () => {} }) {
   const mapRef = useRef(null);

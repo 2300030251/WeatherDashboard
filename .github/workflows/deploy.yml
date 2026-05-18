@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      VITE_GOOGLE_MAPS_KEY: ${{ secrets.VITE_GOOGLE_MAPS_KEY }}
+      VITE_OPENWEATHER_KEY: ${{ secrets.VITE_OPENWEATHER_KEY }}
     permissions:
       contents: write
       pages: write
@@ -32,6 +34,9 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_GOOGLE_MAPS_KEY: ${{ secrets.VITE_GOOGLE_MAPS_KEY }}
+          VITE_OPENWEATHER_KEY: ${{ secrets.VITE_OPENWEATHER_KEY }}
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
