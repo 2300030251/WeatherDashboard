@@ -1,9 +1,9 @@
 // src/mapview.jsx
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 
-// Load keys from Vite environment variables. Set these in .env (VITE_ prefix)
-// or as repository secrets for CI (see README / workflow).
+// Load keys from Vite environment variables. If they are not provided,
+// the component falls back to an embedded map instead of showing a blank box.
 const GOOGLE_MAPS_KEY = import.meta.env.VITE_GOOGLE_MAPS_KEY;
 const OPENWEATHER_KEY = import.meta.env.VITE_OPENWEATHER_KEY;
 
@@ -12,10 +12,12 @@ export default function MapView({ layer = "clouds_new", onLocationSelect = () =>
   const mapInstance = useRef(null);
   const weatherLayerRef = useRef(null);
   const markerRef = useRef(null);
+  const [useFallbackMap, setUseFallbackMap] = useState(false);
 
   useEffect(() => {
     if (!GOOGLE_MAPS_KEY) {
       console.error("Google Maps API key missing.");
+      setUseFallbackMap(true);
       return;
     }
 
@@ -29,6 +31,10 @@ export default function MapView({ layer = "clouds_new", onLocationSelect = () =>
       script.setAttribute("data-gmaps", "true");
       script.onload = () => {
         initMap();
+      };
+      script.onerror = () => {
+        console.error("Google Maps script failed to load.");
+        setUseFallbackMap(true);
       };
       document.head.appendChild(script);
     } else {
@@ -123,7 +129,7 @@ export default function MapView({ layer = "clouds_new", onLocationSelect = () =>
   }
 
   function addWeatherOverlay(layerName) {
-    if (!window.google || !mapInstance.current) return;
+    if (!window.google || !mapInstance.current || !OPENWEATHER_KEY) return;
     const urlTemplate = `https://tile.openweathermap.org/map/${layerName}/{z}/{x}/{y}.png?appid=${OPENWEATHER_KEY}`;
     const layerObj = new window.google.maps.ImageMapType({
       getTileUrl: (coord, zoom) => urlTemplate.replace("{z}", zoom).replace("{x}", coord.x).replace("{y}", coord.y),
@@ -140,6 +146,17 @@ export default function MapView({ layer = "clouds_new", onLocationSelect = () =>
     } catch (e) {}
     weatherLayerRef.current = layerObj;
     mapInstance.current.overlayMapTypes.insertAt(0, layerObj);
+  }
+
+  if (useFallbackMap) {
+    return (
+      <iframe
+        title="Live Google Map fallback"
+        className="map-container map-fallback"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=76.6%2C8.0%2C77.8%2C13.6&layer=mapnik"
+        loading="lazy"
+      />
+    );
   }
 
   return <div ref={mapRef} className="map-container"></div>;
