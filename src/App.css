@@ -14,7 +14,7 @@ body, html {
 }
 
 .weather-box {
- background: linear-gradient(135deg, #32dadd, #3b82f6);
+ background: linear-gradient(135deg, #32dadd, #226be1);
   border-radius: 12px;
   padding: 20px;
   width: 90%;
@@ -57,7 +57,7 @@ body, html {
 
 .error {
   text-align: center;
-  color: #ff6b6b;
+  color: #fc5603;
   font-weight: 600;
   margin-top: 10px;
 }
